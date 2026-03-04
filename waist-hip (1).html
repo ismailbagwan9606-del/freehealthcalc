@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waist-to-Hip Ratio Calculator | FreeHealthCalc</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Calculate your waist-to-hip ratio and understand your cardiovascular health risk. Free WHR calculator based on WHO standards.">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3802590993676347" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #F5F0E8; --surface: #FFFDF8; --ink: #1A1612; --ink-soft: #5C5349; --accent: #C8402A; --accent-light: #F9EAE7; --border: #E2DBCF; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; line-height: 1.6; }
+  .topbar { background: var(--ink); color: #fff; text-align: center; padding: 8px 16px; font-size: 12px; letter-spacing: 0.08em; font-weight: 500; }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav a { font-size: 13px; font-weight: 500; color: var(--ink-soft); text-decoration: none; margin-left: 20px; transition: color .2s; }
+  nav a:hover { color: var(--accent); }
+  .page-hero { background: var(--ink); color: #fff; text-align: center; padding: 52px 20px; }
+  .page-hero .eyebrow { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 14px; border-radius: 2px; margin-bottom: 16px; }
+  .page-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 10px; }
+  .page-hero p { font-size: 14px; color: rgba(255,255,255,0.55); max-width: 500px; margin: 0 auto; }
+  .ad-wrap { max-width: 728px; margin: 28px auto; padding: 0 20px; text-align: center; }
+  .main-wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+  @media (max-width: 760px) { .main-wrap { grid-template-columns: 1fr; } .sidebar { order: 99; } }
+  .calc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 32px rgba(26,22,18,0.07); }
+  .calc-header { background: var(--ink); color: #fff; padding: 22px 28px; display: flex; align-items: center; gap: 12px; }
+  .calc-header-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .calc-header h2 { font-family: 'DM Serif Display', serif; font-size: 20px; font-weight: 400; }
+  .calc-header p { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+  .calc-body { padding: 24px 28px 28px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 7px; }
+  .input-wrap { position: relative; display: flex; align-items: center; }
+  .input-wrap input { width: 100%; padding: 12px 52px 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 500; color: var(--ink); background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; outline: none; transition: border-color .2s; -moz-appearance: textfield; }
+  .input-wrap input::-webkit-outer-spin-button, .input-wrap input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .input-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,64,42,0.12); background: #fff; }
+  .input-unit { position: absolute; right: 14px; font-size: 13px; font-weight: 600; color: var(--ink-soft); pointer-events: none; }
+  .select-field { width: 100%; padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--ink); background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235C5349' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .calc-btn { width: 100%; padding: 16px; background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; transition: background .2s; box-shadow: 0 4px 16px rgba(200,64,42,0.3); margin-top: 8px; }
+  .calc-btn:hover { background: #A8321F; }
+  .result-panel { margin-top: 28px; border-top: 1px solid var(--border); padding-top: 28px; display: none; }
+  .result-panel.show { display: block; animation: fadeUp .4s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .result-center { text-align: center; margin-bottom: 24px; }
+  .r-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
+  .r-big { font-family: 'DM Serif Display', serif; font-size: 72px; line-height: 1; }
+  .r-cat { display: inline-block; font-size: 14px; font-weight: 600; padding: 4px 16px; border-radius: 20px; margin-top: 6px; }
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 20px; }
+  .risk-box { background: var(--bg); border-radius: 8px; padding: 14px 12px; text-align: center; border: 1.5px solid transparent; }
+  .risk-box .rb-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+  .risk-box .rb-val { font-size: 18px; font-weight: 600; }
+  .risk-box.active { box-shadow: 0 2px 12px rgba(0,0,0,0.1); background: var(--surface); }
+  .content-section { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
+  .content-section h2 { font-family: 'DM Serif Display', serif; font-size: 26px; margin-bottom: 16px; }
+  .content-section p { font-size: 15px; color: var(--ink-soft); line-height: 1.75; max-width: 720px; margin-bottom: 14px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .info-card h3 { font-family: 'DM Serif Display', serif; font-size: 17px; margin-bottom: 12px; }
+  .info-card p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 10px; }
+  .quick-links { list-style: none; }
+  .quick-links li { border-bottom: 1px solid var(--border); padding: 9px 0; }
+  .quick-links li:last-child { border-bottom: none; }
+  .quick-links a { font-size: 13.5px; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .quick-links a::before { content: "→"; }
+  footer { background: var(--ink); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 20px; font-size: 13px; }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="topbar">Free · No Sign-up · Instant Results · Works on Any Device</div>
+<header>
+  <a href="index.html" class="logo">BMI<span>Calc</span>.io</a>
+  <nav>
+    <a href="index.html">BMI Calculator</a>
+    <a href="calorie-calculator.html">Calories</a>
+    <a href="ideal-weight.html">Ideal Weight</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="eyebrow">Health Tools</div>
+  <h1>Waist-to-Hip Ratio</h1>
+  <p>Assess your cardiovascular and metabolic health risk using the WHO waist-to-hip ratio standard.</p>
+</div>
+
+<div class="ad-wrap">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="main-wrap">
+  <div>
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="calc-header-icon">📐</div>
+        <div>
+          <h2>Waist-to-Hip Ratio</h2>
+          <p>WHO Standard · Cardiovascular Risk</p>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="field-row" style="margin-bottom: 24px;">
+          <div class="field">
+            <label>Gender</label>
+            <select class="select-field" id="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Waist</label>
+            <div class="input-wrap">
+              <input type="number" id="waist" placeholder="80" min="40" max="200">
+              <span class="input-unit">cm</span>
+            </div>
+          </div>
+        </div>
+        <div class="field-row single" style="margin-bottom:24px;">
+          <div class="field">
+            <label>Hip</label>
+            <div class="input-wrap">
+              <input type="number" id="hip" placeholder="95" min="40" max="200">
+              <span class="input-unit">cm</span>
+            </div>
+          </div>
+        </div>
+        <button class="calc-btn" onclick="calculateWHR()">Calculate Ratio →</button>
+
+        <div class="result-panel" id="result-panel">
+          <div class="result-center">
+            <div class="r-label">Your WHR Score</div>
+            <div class="r-big" id="whr-val">—</div>
+            <div><span class="r-cat" id="whr-cat">—</span></div>
+          </div>
+          <div class="risk-grid">
+            <div class="risk-box" id="box-low" style="border-color:#22C55E;">
+              <div class="rb-label" style="color:#2E7D52;">Low Risk</div>
+              <div class="rb-val" id="low-val">—</div>
+            </div>
+            <div class="risk-box" id="box-mod" style="border-color:#EAB308;">
+              <div class="rb-label" style="color:#B8860B;">Moderate</div>
+              <div class="rb-val" id="mod-val">—</div>
+            </div>
+            <div class="risk-box" id="box-high" style="border-color:#EF4444;">
+              <div class="rb-label" style="color:#C8402A;">High Risk</div>
+              <div class="rb-val" id="high-val">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div style="text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <div class="info-card">
+      <h3>WHO Thresholds</h3>
+      <p><strong>Men:</strong> Low risk below 0.90, high risk above 1.00.</p>
+      <p><strong>Women:</strong> Low risk below 0.80, high risk above 0.85.</p>
+      <p>Higher WHR is associated with greater risk of heart disease, diabetes, and stroke.</p>
+    </div>
+    <div class="info-card">
+      <h3>Other Calculators</h3>
+      <ul class="quick-links">
+        <li><a href="index.html">BMI Calculator</a></li>
+        <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+        <li><a href="body-fat.html">Body Fat %</a></li>
+        <li><a href="ideal-weight.html">Ideal Weight</a></li>
+      </ul>
+    </div>
+    <div style="text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </aside>
+</div>
+
+<div class="content-section">
+  <h2>Why Waist-to-Hip Ratio Matters</h2>
+  <p>The waist-to-hip ratio (WHR) is a measurement of the proportion of fat stored around the waist compared to the hips. It's a better predictor of cardiovascular disease risk than BMI alone, because it reflects where fat is stored — abdominal fat is more dangerous than hip/thigh fat.</p>
+  <p>The World Health Organization (WHO) considers WHR to be a strong indicator of health risk, particularly for metabolic syndrome, type 2 diabetes, and cardiovascular disease.</p>
+</div>
+
+<footer>
+  <p>© 2025 BMICalc.io · For informational purposes only · Not medical advice</p>
+  <p style="margin-top:6px"><a href="index.html">Home</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="about.html">About</a></p>
+</footer>
+
+<script>
+function calculateWHR() {
+  const gender = document.getElementById('gender').value;
+  const waist = parseFloat(document.getElementById('waist').value);
+  const hip = parseFloat(document.getElementById('hip').value);
+  if (!waist || !hip) { alert('Please enter waist and hip measurements.'); return; }
+  const whr = (waist / hip).toFixed(2);
+  let cat, color, low, mod, high;
+  if (gender === 'male') {
+    low = '< 0.90'; mod = '0.90 – 0.99'; high = '≥ 1.00';
+    if (whr < 0.90) { cat = 'Low Risk'; color = '#2E7D52'; }
+    else if (whr < 1.00) { cat = 'Moderate Risk'; color = '#B8860B'; }
+    else { cat = 'High Risk'; color = '#C8402A'; }
+  } else {
+    low = '< 0.80'; mod = '0.80 – 0.84'; high = '≥ 0.85';
+    if (whr < 0.80) { cat = 'Low Risk'; color = '#2E7D52'; }
+    else if (whr < 0.85) { cat = 'Moderate Risk'; color = '#B8860B'; }
+    else { cat = 'High Risk'; color = '#C8402A'; }
+  }
+  const valEl = document.getElementById('whr-val');
+  valEl.textContent = whr;
+  valEl.style.color = color;
+  const catEl = document.getElementById('whr-cat');
+  catEl.textContent = cat;
+  catEl.style.background = color + '20';
+  catEl.style.color = color;
+  document.getElementById('low-val').textContent = low;
+  document.getElementById('mod-val').textContent = mod;
+  document.getElementById('high-val').textContent = high;
+  document.getElementById('result-panel').classList.add('show');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Enter') calculateWHR(); });
+</script>
+</body>
+</html>

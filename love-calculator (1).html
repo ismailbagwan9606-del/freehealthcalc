@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Calculator — Check Compatibility | FreeHealthCalc</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Find out your love compatibility percentage! Free love calculator — enter two names and discover your match score instantly.">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3802590993676347" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #F5F0E8; --surface: #FFFDF8; --ink: #1A1612; --ink-soft: #5C5349; --accent: #C8402A; --accent-light: #F9EAE7; --border: #E2DBCF; --love: #E91E8C; --love-light: #FDF0F7; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; line-height: 1.6; }
+  .topbar { background: var(--ink); color: #fff; text-align: center; padding: 8px 16px; font-size: 12px; letter-spacing: 0.08em; font-weight: 500; }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav a { font-size: 13px; font-weight: 500; color: var(--ink-soft); text-decoration: none; margin-left: 16px; transition: color .2s; }
+  nav a:hover { color: var(--accent); }
+  .page-hero { background: var(--ink); color: #fff; text-align: center; padding: 52px 20px; position: relative; overflow: hidden; }
+  .page-hero::before { content: '💕'; font-size: 120px; opacity: 0.05; position: absolute; top: -20px; right: 40px; }
+  .page-hero .eyebrow { display: inline-block; background: var(--love); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 14px; border-radius: 2px; margin-bottom: 16px; }
+  .page-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 10px; }
+  .page-hero p { font-size: 14px; color: rgba(255,255,255,0.55); max-width: 500px; margin: 0 auto; }
+  .ad-wrap { max-width: 728px; margin: 28px auto; padding: 0 20px; text-align: center; }
+  .main-wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+  @media (max-width: 760px) { .main-wrap { grid-template-columns: 1fr; } .sidebar { order: 99; } }
+  .calc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 32px rgba(26,22,18,0.07); }
+  .calc-header { background: var(--ink); color: #fff; padding: 22px 28px; display: flex; align-items: center; gap: 12px; }
+  .calc-header-icon { width: 36px; height: 36px; background: var(--love); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .calc-header h2 { font-family: 'DM Serif Display', serif; font-size: 20px; font-weight: 400; }
+  .calc-header p { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+  .calc-body { padding: 28px; }
+  .names-row { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+  @media (max-width: 500px) { .names-row { flex-direction: column; } }
+  .name-field { flex: 1; }
+  .name-field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 7px; }
+  .name-input { width: 100%; padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 500; color: var(--ink); background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; outline: none; transition: border-color .2s; text-align: center; }
+  .name-input:focus { border-color: var(--love); box-shadow: 0 0 0 3px rgba(233,30,140,0.12); background: #fff; }
+  .heart-divider { font-size: 28px; flex-shrink: 0; margin-top: 22px; animation: heartbeat 1.5s ease-in-out infinite; }
+  @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+  .calc-btn { width: 100%; padding: 16px; background: var(--love); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; transition: background .2s; box-shadow: 0 4px 16px rgba(233,30,140,0.3); }
+  .calc-btn:hover { background: #C4186E; }
+  .result-panel { margin-top: 28px; border-top: 1px solid var(--border); padding-top: 28px; display: none; }
+  .result-panel.show { display: block; animation: fadeUp .5s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .love-result { text-align: center; margin-bottom: 28px; }
+  .love-names { font-size: 18px; font-weight: 600; color: var(--ink-soft); margin-bottom: 16px; }
+  .love-names span { color: var(--love); }
+  .love-percent { font-family: 'DM Serif Display', serif; font-size: 100px; line-height: 1; transition: color .5s; margin-bottom: 8px; }
+  .love-emoji { font-size: 40px; margin-bottom: 12px; }
+  .love-msg { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .love-sub { font-size: 14px; color: var(--ink-soft); max-width: 400px; margin: 0 auto; }
+  .love-bar-wrap { height: 16px; background: var(--bg); border-radius: 8px; overflow: hidden; margin: 20px 0; border: 1px solid var(--border); }
+  .love-bar-fill { height: 100%; border-radius: 8px; transition: width 1s cubic-bezier(.34,1.56,.64,1); background: linear-gradient(to right, #F97316, var(--love)); }
+  .traits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 4px; }
+  .trait-box { background: var(--love-light); border-radius: 8px; padding: 14px; border: 1px solid #f5c6e4; text-align: center; }
+  .trait-box .t-icon { font-size: 24px; margin-bottom: 4px; }
+  .trait-box .t-label { font-size: 12px; font-weight: 600; color: var(--love); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2px; }
+  .trait-box .t-val { font-size: 14px; color: var(--ink-soft); }
+  .try-again-btn { width: 100%; padding: 12px; background: transparent; border: 1.5px solid var(--love); color: var(--love); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; margin-top: 16px; transition: all .2s; }
+  .try-again-btn:hover { background: var(--love); color: #fff; }
+  .disclaimer { font-size: 12px; color: var(--ink-soft); text-align: center; margin-top: 12px; opacity: 0.7; }
+  .content-section { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
+  .content-section h2 { font-family: 'DM Serif Display', serif; font-size: 26px; margin-bottom: 16px; }
+  .content-section p { font-size: 15px; color: var(--ink-soft); line-height: 1.75; max-width: 720px; margin-bottom: 14px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .info-card h3 { font-family: 'DM Serif Display', serif; font-size: 17px; margin-bottom: 12px; }
+  .info-card p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 10px; }
+  .quick-links { list-style: none; }
+  .quick-links li { border-bottom: 1px solid var(--border); padding: 9px 0; }
+  .quick-links li:last-child { border-bottom: none; }
+  .quick-links a { font-size: 13.5px; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .quick-links a::before { content: "→"; }
+  footer { background: var(--ink); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 20px; font-size: 13px; }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="topbar">Free · No Sign-up · Instant Results · Works on Any Device</div>
+<header>
+  <a href="index.html" class="logo">BMI<span>Calc</span>.io</a>
+  <nav>
+    <a href="index.html">BMI</a>
+    <a href="calorie-calculator.html">Calories</a>
+    <a href="age-calculator.html">Age</a>
+    <a href="due-date.html">Due Date</a>
+    <a href="love-calculator.html">Love</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="eyebrow">Fun Tool</div>
+  <h1>Love Calculator 💕</h1>
+  <p>Enter two names and discover your love compatibility score instantly. Share with your crush!</p>
+</div>
+
+<div class="ad-wrap">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="main-wrap">
+  <div>
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="calc-header-icon">💘</div>
+        <div>
+          <h2>Love Compatibility Calculator</h2>
+          <p>Just for fun · Share with friends</p>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="names-row">
+          <div class="name-field">
+            <label>Your Name</label>
+            <input type="text" class="name-input" id="name1" placeholder="Your name" maxlength="40">
+          </div>
+          <div class="heart-divider">❤️</div>
+          <div class="name-field">
+            <label>Their Name</label>
+            <input type="text" class="name-input" id="name2" placeholder="Their name" maxlength="40">
+          </div>
+        </div>
+        <button class="calc-btn" onclick="calculateLove()">Calculate Love Score 💕</button>
+
+        <div class="result-panel" id="result-panel">
+          <div class="love-result">
+            <div class="love-names"><span id="r-name1">—</span> & <span id="r-name2">—</span></div>
+            <div class="love-emoji" id="love-emoji">❤️</div>
+            <div class="love-percent" id="love-percent">—</div>
+            <div class="love-msg" id="love-msg">—</div>
+            <div class="love-sub" id="love-sub">—</div>
+          </div>
+
+          <div class="love-bar-wrap">
+            <div class="love-bar-fill" id="love-bar" style="width: 0%"></div>
+          </div>
+
+          <div class="traits-grid">
+            <div class="trait-box">
+              <div class="t-icon">🔥</div>
+              <div class="t-label">Chemistry</div>
+              <div class="t-val" id="trait-chemistry">—</div>
+            </div>
+            <div class="trait-box">
+              <div class="t-icon">🤝</div>
+              <div class="t-label">Trust</div>
+              <div class="t-val" id="trait-trust">—</div>
+            </div>
+            <div class="trait-box">
+              <div class="t-icon">💬</div>
+              <div class="t-label">Communication</div>
+              <div class="t-val" id="trait-comm">—</div>
+            </div>
+            <div class="trait-box">
+              <div class="t-icon">🌟</div>
+              <div class="t-label">Future Together</div>
+              <div class="t-val" id="trait-future">—</div>
+            </div>
+          </div>
+
+          <button class="try-again-btn" onclick="resetCalculator()">🔄 Try Different Names</button>
+          <p class="disclaimer">⚠️ Just for fun! Results are generated for entertainment purposes only.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div style="text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <div class="info-card">
+      <h3>Share the Fun! 💕</h3>
+      <p>Try your name with friends, celebrities, or fictional characters! Share your score on social media.</p>
+      <p>Remember — real love is built on trust, communication, and shared values — not name calculations! 😄</p>
+    </div>
+    <div class="info-card">
+      <h3>Other Calculators</h3>
+      <ul class="quick-links">
+        <li><a href="index.html">BMI Calculator</a></li>
+        <li><a href="age-calculator.html">Age Calculator</a></li>
+        <li><a href="due-date.html">Due Date Calculator</a></li>
+        <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+        <li><a href="ideal-weight.html">Ideal Weight</a></li>
+      </ul>
+    </div>
+    <div style="text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </aside>
+</div>
+
+<div class="content-section">
+  <h2>About the Love Calculator</h2>
+  <p>Our love calculator is a fun, lighthearted tool that generates a compatibility score based on the names entered. It's purely for entertainment and should not be taken as relationship advice!</p>
+  <p>Real compatibility in a relationship depends on shared values, mutual respect, communication, and emotional connection — things no calculator can truly measure. But hey, it's fun to try! 💕</p>
+</div>
+
+<footer>
+  <p>© 2025 BMICalc.io · For entertainment purposes only</p>
+  <p style="margin-top:6px"><a href="index.html">Home</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="about.html">About</a></p>
+</footer>
+
+<script>
+function hashNames(n1, n2) {
+  const combined = (n1 + n2).toLowerCase().replace(/\s/g, '');
+  let hash = 0;
+  for (let i = 0; i < combined.length; i++) {
+    hash = ((hash << 5) - hash) + combined.charCodeAt(i);
+    hash |= 0;
+  }
+  // Normalize to 1-99, bias toward middle (50-90) for fun
+  const raw = Math.abs(hash) % 100;
+  const biased = Math.floor(40 + (raw / 100) * 58);
+  return Math.min(99, Math.max(1, biased));
+}
+
+function traitScore(base, offset) {
+  const val = Math.min(100, Math.max(10, base + offset));
+  if (val >= 80) return 'Excellent ⭐';
+  if (val >= 60) return 'Great 👍';
+  if (val >= 40) return 'Good 😊';
+  return 'Growing 🌱';
+}
+
+function calculateLove() {
+  const n1 = document.getElementById('name1').value.trim();
+  const n2 = document.getElementById('name2').value.trim();
+  if (!n1 || !n2) { alert('Please enter both names!'); return; }
+
+  const score = hashNames(n1, n2);
+
+  let emoji, msg, sub, color;
+  if (score >= 90) { emoji = '💯'; msg = 'Soulmates!'; sub = 'You two are made for each other. This is a rare, extraordinary connection!'; color = '#E91E8C'; }
+  else if (score >= 75) { emoji = '💕'; msg = 'Perfect Match!'; sub = 'You have incredible chemistry and compatibility. Cherish this connection!'; color = '#E91E8C'; }
+  else if (score >= 60) { emoji = '❤️'; msg = 'Great Couple!'; sub = 'You complement each other well. With effort, this could be something beautiful.'; color = '#C8402A'; }
+  else if (score >= 45) { emoji = '💛'; msg = 'Good Potential!'; sub = 'You have a solid foundation. Focus on communication and understanding.'; color = '#B8860B'; }
+  else if (score >= 30) { emoji = '🤍'; msg = 'Friendly Connection'; sub = 'You get along well as friends. Romance may need a little more work!'; color = '#5C5349'; }
+  else { emoji = '💙'; msg = 'Opposites Attract!'; sub = 'Sometimes the most unlikely pairs make the best stories. Give it a chance!'; color = '#1B5E8A'; }
+
+  document.getElementById('r-name1').textContent = n1;
+  document.getElementById('r-name2').textContent = n2;
+  document.getElementById('love-emoji').textContent = emoji;
+  document.getElementById('love-percent').textContent = score + '%';
+  document.getElementById('love-percent').style.color = color;
+  document.getElementById('love-msg').textContent = msg;
+  document.getElementById('love-sub').textContent = sub;
+
+  setTimeout(() => { document.getElementById('love-bar').style.width = score + '%'; }, 100);
+
+  document.getElementById('trait-chemistry').textContent = traitScore(score, -5);
+  document.getElementById('trait-trust').textContent = traitScore(score, 8);
+  document.getElementById('trait-comm').textContent = traitScore(score, -12);
+  document.getElementById('trait-future').textContent = traitScore(score, 4);
+
+  document.getElementById('result-panel').classList.add('show');
+  document.getElementById('result-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetCalculator() {
+  document.getElementById('name1').value = '';
+  document.getElementById('name2').value = '';
+  document.getElementById('result-panel').classList.remove('show');
+  document.getElementById('love-bar').style.width = '0%';
+  document.getElementById('name1').focus();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Enter') calculateLove(); });
+</script>
+</body>
+</html>

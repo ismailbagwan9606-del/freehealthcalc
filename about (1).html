@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | FreeHealthCalc</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Learn about BMICalc.io — a free, trusted resource for health calculators including BMI, calorie, ideal weight, and body fat calculators.">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3802590993676347" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #F5F0E8; --surface: #FFFDF8; --ink: #1A1612; --ink-soft: #5C5349; --accent: #C8402A; --accent-light: #F9EAE7; --border: #E2DBCF; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; line-height: 1.6; }
+  .topbar { background: var(--ink); color: #fff; text-align: center; padding: 8px 16px; font-size: 12px; letter-spacing: 0.08em; font-weight: 500; }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav a { font-size: 13px; font-weight: 500; color: var(--ink-soft); text-decoration: none; margin-left: 20px; transition: color .2s; }
+  nav a:hover { color: var(--accent); }
+  .page-hero { background: var(--ink); color: #fff; text-align: center; padding: 52px 20px; }
+  .page-hero .eyebrow { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 14px; border-radius: 2px; margin-bottom: 16px; }
+  .page-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 10px; }
+  .page-hero p { font-size: 14px; color: rgba(255,255,255,0.55); max-width: 500px; margin: 0 auto; }
+  .ad-wrap { max-width: 728px; margin: 28px auto; padding: 0 20px; text-align: center; }
+  .main-wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+  @media (max-width: 760px) { .main-wrap { grid-template-columns: 1fr; } .sidebar { order: 99; } }
+  .content-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 40px 44px; box-shadow: 0 4px 32px rgba(26,22,18,0.07); }
+  @media (max-width: 600px) { .content-card { padding: 24px 20px; } }
+  .content-card h2 { font-family: 'DM Serif Display', serif; font-size: 24px; margin: 32px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .content-card h2:first-child { margin-top: 0; }
+  .content-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 14px; }
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+  @media (max-width: 500px) { .tool-grid { grid-template-columns: 1fr; } }
+  .tool-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-decoration: none; transition: box-shadow .2s, transform .2s; display: block; }
+  .tool-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .tool-card .tc-icon { font-size: 28px; margin-bottom: 8px; }
+  .tool-card .tc-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--ink); margin-bottom: 4px; }
+  .tool-card .tc-desc { font-size: 13px; color: var(--ink-soft); }
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+  .stat-box { background: var(--bg); border-radius: 10px; padding: 20px; text-align: center; border: 1px solid var(--border); }
+  .stat-box .s-num { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--accent); }
+  .stat-box .s-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin-top: 4px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .info-card h3 { font-family: 'DM Serif Display', serif; font-size: 17px; margin-bottom: 12px; }
+  .info-card p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 10px; }
+  .quick-links { list-style: none; }
+  .quick-links li { border-bottom: 1px solid var(--border); padding: 9px 0; }
+  .quick-links li:last-child { border-bottom: none; }
+  .quick-links a { font-size: 13.5px; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .quick-links a::before { content: "→"; }
+  footer { background: var(--ink); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 20px; font-size: 13px; }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="topbar">Free · No Sign-up · Instant Results · Works on Any Device</div>
+<header>
+  <a href="index.html" class="logo">BMI<span>Calc</span>.io</a>
+  <nav>
+    <a href="index.html">BMI Calculator</a>
+    <a href="calorie-calculator.html">Calories</a>
+    <a href="ideal-weight.html">Ideal Weight</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="eyebrow">About Us</div>
+  <h1>Our Mission</h1>
+  <p>Making trusted health information free, fast, and accessible to everyone.</p>
+</div>
+
+<div class="ad-wrap">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="main-wrap">
+  <div>
+    <div class="content-card">
+
+      <h2>Who We Are</h2>
+      <p>BMICalc.io is a free online health calculator platform designed to help people understand their body metrics quickly and accurately. We believe everyone deserves access to reliable health information — no subscriptions, no sign-ups, no paywalls.</p>
+      <p>All our calculators are built using internationally recognized formulas from the World Health Organization (WHO), the US Navy, and peer-reviewed medical research.</p>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="s-num">5</div>
+          <div class="s-label">Free Tools</div>
+        </div>
+        <div class="stat-box">
+          <div class="s-num">100%</div>
+          <div class="s-label">Free Forever</div>
+        </div>
+        <div class="stat-box">
+          <div class="s-num">0</div>
+          <div class="s-label">Sign-ups Needed</div>
+        </div>
+      </div>
+
+      <h2>Our Tools</h2>
+      <p>We provide a growing suite of health calculators, each built with accuracy and simplicity in mind:</p>
+
+      <div class="tool-grid">
+        <a href="index.html" class="tool-card">
+          <div class="tc-icon">⚖️</div>
+          <div class="tc-name">BMI Calculator</div>
+          <div class="tc-desc">Body Mass Index using WHO standards</div>
+        </a>
+        <a href="calorie-calculator.html" class="tool-card">
+          <div class="tc-icon">🔥</div>
+          <div class="tc-name">Calorie Calculator</div>
+          <div class="tc-desc">TDEE & BMR using Mifflin-St Jeor</div>
+        </a>
+        <a href="ideal-weight.html" class="tool-card">
+          <div class="tc-icon">🎯</div>
+          <div class="tc-name">Ideal Weight</div>
+          <div class="tc-desc">4 validated formulas combined</div>
+        </a>
+        <a href="body-fat.html" class="tool-card">
+          <div class="tc-icon">📏</div>
+          <div class="tc-name">Body Fat %</div>
+          <div class="tc-desc">US Navy circumference method</div>
+        </a>
+        <a href="waist-hip.html" class="tool-card">
+          <div class="tc-icon">📐</div>
+          <div class="tc-name">Waist-to-Hip Ratio</div>
+          <div class="tc-desc">WHO cardiovascular risk standard</div>
+        </a>
+      </div>
+
+      <h2>Accuracy & Disclaimer</h2>
+      <p>All calculators on BMICalc.io use validated, peer-reviewed formulas. However, our tools are for <strong>informational and educational purposes only</strong> and should not replace professional medical advice, diagnosis, or treatment.</p>
+      <p>Always consult a qualified healthcare provider before making decisions about your health, diet, or exercise routine. Individual results may vary based on factors not captured by these formulas.</p>
+
+      <h2>Privacy</h2>
+      <p>We take your privacy seriously. All calculations happen directly in your browser — your personal health data (height, weight, measurements) is <strong>never sent to our servers or stored anywhere</strong>. Please read our <a href="privacy-policy.html" style="color:var(--accent);">Privacy Policy</a> for full details.</p>
+
+      <h2>Contact</h2>
+      <p>Have a question, suggestion, or found an error? We'd love to hear from you. Reach out via our <a href="https://github.com/ismailbagwan9606-del" target="_blank" style="color:var(--accent);">GitHub page</a>.</p>
+
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div style="text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <div class="info-card">
+      <h3>Our Calculators</h3>
+      <ul class="quick-links">
+        <li><a href="index.html">BMI Calculator</a></li>
+        <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+        <li><a href="ideal-weight.html">Ideal Weight</a></li>
+        <li><a href="body-fat.html">Body Fat %</a></li>
+        <li><a href="waist-hip.html">Waist-to-Hip Ratio</a></li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>Legal</h3>
+      <ul class="quick-links">
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </div>
+    <div style="text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <p>© 2025 BMICalc.io · For informational purposes only · Not medical advice</p>
+  <p style="margin-top:6px"><a href="index.html">Home</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="about.html">About</a></p>
+</footer>
+
+</body>
+</html>

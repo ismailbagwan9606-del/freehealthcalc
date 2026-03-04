@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator — Calculate Your Exact Age | FreeHealthCalc</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Calculate your exact age in years, months, days, hours and minutes. Free online age calculator — instant results.">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3802590993676347" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #F5F0E8; --surface: #FFFDF8; --ink: #1A1612; --ink-soft: #5C5349; --accent: #C8402A; --accent-light: #F9EAE7; --border: #E2DBCF; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; line-height: 1.6; }
+  .topbar { background: var(--ink); color: #fff; text-align: center; padding: 8px 16px; font-size: 12px; letter-spacing: 0.08em; font-weight: 500; }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav a { font-size: 13px; font-weight: 500; color: var(--ink-soft); text-decoration: none; margin-left: 16px; transition: color .2s; }
+  nav a:hover { color: var(--accent); }
+  .page-hero { background: var(--ink); color: #fff; text-align: center; padding: 52px 20px; }
+  .page-hero .eyebrow { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 14px; border-radius: 2px; margin-bottom: 16px; }
+  .page-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 10px; }
+  .page-hero p { font-size: 14px; color: rgba(255,255,255,0.55); max-width: 500px; margin: 0 auto; }
+  .ad-wrap { max-width: 728px; margin: 28px auto; padding: 0 20px; text-align: center; }
+  .main-wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+  @media (max-width: 760px) { .main-wrap { grid-template-columns: 1fr; } .sidebar { order: 99; } }
+  .calc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 32px rgba(26,22,18,0.07); }
+  .calc-header { background: var(--ink); color: #fff; padding: 22px 28px; display: flex; align-items: center; gap: 12px; }
+  .calc-header-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .calc-header h2 { font-family: 'DM Serif Display', serif; font-size: 20px; font-weight: 400; }
+  .calc-header p { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+  .calc-body { padding: 24px 28px 28px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 7px; }
+  .date-input { width: 100%; padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; color: var(--ink); background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; outline: none; transition: border-color .2s, box-shadow .2s; }
+  .date-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,64,42,0.12); background: #fff; }
+  .calc-btn { width: 100%; padding: 16px; background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; transition: background .2s; box-shadow: 0 4px 16px rgba(200,64,42,0.3); margin-top: 8px; }
+  .calc-btn:hover { background: #A8321F; }
+  .result-panel { margin-top: 28px; border-top: 1px solid var(--border); padding-top: 28px; display: none; }
+  .result-panel.show { display: block; animation: fadeUp .4s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .age-big { text-align: center; margin-bottom: 28px; }
+  .age-big .label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
+  .age-big .years { font-family: 'DM Serif Display', serif; font-size: 90px; color: var(--accent); line-height: 1; }
+  .age-big .years-label { font-size: 18px; color: var(--ink-soft); font-weight: 500; margin-top: 4px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+  @media (max-width: 500px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  .stat-box { background: var(--bg); border-radius: 10px; padding: 16px; text-align: center; border: 1px solid var(--border); }
+  .stat-box .s-val { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--ink); }
+  .stat-box .s-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-soft); margin-top: 3px; }
+  .next-bday { background: var(--accent-light); border: 1px solid #f0c4bc; border-radius: 10px; padding: 16px 20px; display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--accent); font-weight: 500; }
+  .fun-facts { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fun-box { background: var(--bg); border-radius: 8px; padding: 14px; border: 1px solid var(--border); }
+  .fun-box .f-val { font-size: 20px; font-weight: 700; color: var(--ink); }
+  .fun-box .f-label { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .content-section { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
+  .content-section h2 { font-family: 'DM Serif Display', serif; font-size: 26px; margin-bottom: 16px; }
+  .content-section p { font-size: 15px; color: var(--ink-soft); line-height: 1.75; max-width: 720px; margin-bottom: 14px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .info-card h3 { font-family: 'DM Serif Display', serif; font-size: 17px; margin-bottom: 12px; }
+  .info-card p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 10px; }
+  .quick-links { list-style: none; }
+  .quick-links li { border-bottom: 1px solid var(--border); padding: 9px 0; }
+  .quick-links li:last-child { border-bottom: none; }
+  .quick-links a { font-size: 13.5px; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .quick-links a::before { content: "→"; }
+  .quick-links a:hover { text-decoration: underline; }
+  footer { background: var(--ink); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 20px; font-size: 13px; }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="topbar">Free · No Sign-up · Instant Results · Works on Any Device</div>
+<header>
+  <a href="index.html" class="logo">BMI<span>Calc</span>.io</a>
+  <nav>
+    <a href="index.html">BMI</a>
+    <a href="calorie-calculator.html">Calories</a>
+    <a href="age-calculator.html">Age</a>
+    <a href="due-date.html">Due Date</a>
+    <a href="love-calculator.html">Love</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="eyebrow">Free Tool</div>
+  <h1>Age Calculator</h1>
+  <p>Find out your exact age in years, months, days, hours and minutes — plus fun facts about your life!</p>
+</div>
+
+<div class="ad-wrap">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="main-wrap">
+  <div>
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="calc-header-icon">🎂</div>
+        <div>
+          <h2>Age Calculator</h2>
+          <p>Exact Age · Next Birthday · Fun Facts</p>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="field-row">
+          <div class="field">
+            <label>Date of Birth</label>
+            <input type="date" class="date-input" id="dob">
+          </div>
+          <div class="field">
+            <label>Age At Date (optional)</label>
+            <input type="date" class="date-input" id="target-date">
+          </div>
+        </div>
+        <button class="calc-btn" onclick="calculateAge()">Calculate My Age →</button>
+
+        <div class="result-panel" id="result-panel">
+          <div class="age-big">
+            <div class="label">Your Age</div>
+            <div class="years" id="years-val">—</div>
+            <div class="years-label">Years Old</div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="s-val" id="months-val">—</div>
+              <div class="s-label">Months</div>
+            </div>
+            <div class="stat-box">
+              <div class="s-val" id="weeks-val">—</div>
+              <div class="s-label">Weeks</div>
+            </div>
+            <div class="stat-box">
+              <div class="s-val" id="days-val">—</div>
+              <div class="s-label">Days</div>
+            </div>
+            <div class="stat-box">
+              <div class="s-val" id="hours-val">—</div>
+              <div class="s-label">Hours</div>
+            </div>
+            <div class="stat-box">
+              <div class="s-val" id="mins-val">—</div>
+              <div class="s-label">Minutes</div>
+            </div>
+            <div class="stat-box">
+              <div class="s-val" id="secs-val">—</div>
+              <div class="s-label">Seconds</div>
+            </div>
+          </div>
+
+          <div class="next-bday" id="next-bday">
+            🎉 <span id="bday-text">—</span>
+          </div>
+
+          <div class="fun-facts">
+            <div class="fun-box">
+              <div class="f-val" id="heartbeats">—</div>
+              <div class="f-label">❤️ Heartbeats (approx)</div>
+            </div>
+            <div class="fun-box">
+              <div class="f-val" id="breaths">—</div>
+              <div class="f-label">💨 Breaths taken</div>
+            </div>
+            <div class="fun-box">
+              <div class="f-val" id="sleephrs">—</div>
+              <div class="f-label">😴 Hours slept (avg)</div>
+            </div>
+            <div class="fun-box">
+              <div class="f-val" id="meals">—</div>
+              <div class="f-label">🍽️ Meals eaten (avg)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div style="text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <div class="info-card">
+      <h3>Did You Know?</h3>
+      <p>The human heart beats about 100,000 times per day — that's over 2.5 billion beats in a 70-year lifetime!</p>
+      <p>On average, a person takes about 20,000 breaths per day.</p>
+    </div>
+    <div class="info-card">
+      <h3>Other Calculators</h3>
+      <ul class="quick-links">
+        <li><a href="index.html">BMI Calculator</a></li>
+        <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+        <li><a href="due-date.html">Due Date Calculator</a></li>
+        <li><a href="love-calculator.html">Love Calculator</a></li>
+        <li><a href="ideal-weight.html">Ideal Weight</a></li>
+      </ul>
+    </div>
+    <div style="text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3802590993676347" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </aside>
+</div>
+
+<div class="content-section">
+  <h2>How Does the Age Calculator Work?</h2>
+  <p>Our age calculator computes the exact difference between your date of birth and today (or any target date you choose). It breaks down your age into years, months, weeks, days, hours, minutes and even seconds.</p>
+  <p>You can also use the "Age At Date" field to find out how old you were (or will be) on any specific date in the past or future — perfect for calculating age at marriage, graduation, retirement, and more.</p>
+</div>
+
+<footer>
+  <p>© 2025 BMICalc.io · For informational purposes only</p>
+  <p style="margin-top:6px"><a href="index.html">Home</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="about.html">About</a></p>
+</footer>
+
+<script>
+function calculateAge() {
+  const dobVal = document.getElementById('dob').value;
+  if (!dobVal) { alert('Please enter your date of birth.'); return; }
+  const dob = new Date(dobVal);
+  const targetVal = document.getElementById('target-date').value;
+  const today = targetVal ? new Date(targetVal) : new Date();
+  if (dob > today) { alert('Date of birth cannot be in the future.'); return; }
+
+  // Exact years, months, days
+  let years = today.getFullYear() - dob.getFullYear();
+  let months = today.getMonth() - dob.getMonth();
+  let days = today.getDate() - dob.getDate();
+  if (days < 0) { months--; const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0); days += prevMonth.getDate(); }
+  if (months < 0) { years--; months += 12; }
+  const totalDays = Math.floor((today - dob) / (1000 * 60 * 60 * 24));
+  const totalWeeks = Math.floor(totalDays / 7);
+  const totalMonths = years * 12 + months;
+  const totalHours = totalDays * 24;
+  const totalMins = totalHours * 60;
+  const totalSecs = totalMins * 60;
+
+  document.getElementById('years-val').textContent = years;
+  document.getElementById('months-val').textContent = totalMonths.toLocaleString();
+  document.getElementById('weeks-val').textContent = totalWeeks.toLocaleString();
+  document.getElementById('days-val').textContent = totalDays.toLocaleString();
+  document.getElementById('hours-val').textContent = totalHours.toLocaleString();
+  document.getElementById('mins-val').textContent = totalMins.toLocaleString();
+  document.getElementById('secs-val').textContent = totalSecs.toLocaleString();
+
+  // Next birthday
+  const nextBday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+  if (nextBday <= today) nextBday.setFullYear(today.getFullYear() + 1);
+  const daysUntil = Math.ceil((nextBday - today) / (1000 * 60 * 60 * 24));
+  if (daysUntil === 0) {
+    document.getElementById('bday-text').textContent = '🎂 Happy Birthday! Today is your birthday!';
+  } else {
+    document.getElementById('bday-text').textContent = `Your next birthday is in ${daysUntil} days!`;
+  }
+
+  // Fun facts
+  document.getElementById('heartbeats').textContent = (totalDays * 100000).toLocaleString();
+  document.getElementById('breaths').textContent = (totalDays * 20000).toLocaleString();
+  document.getElementById('sleephrs').textContent = (totalDays * 8).toLocaleString();
+  document.getElementById('meals').textContent = (totalDays * 3).toLocaleString();
+
+  document.getElementById('result-panel').classList.add('show');
+}
+
+// Set today as default target date
+document.getElementById('target-date').valueAsDate = new Date();
+</script>
+</body>
+</html>
